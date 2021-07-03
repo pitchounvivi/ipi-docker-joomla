@@ -43,6 +43,11 @@ docker run -d -p 80:80 debianjoomla:v1
 ## pour ouvrir dans le terminal dans le container
 docker run -it debianjoomla:v1
 
+## pour créer un container et ouvrir un bash dedans
+docker run -it debianjoomla:v1 bash
+
 ## vérification de la présence de php
 php -v
 
+## pour voir et faire des commande dans le container
+docker exec -it nom_du_container bash
