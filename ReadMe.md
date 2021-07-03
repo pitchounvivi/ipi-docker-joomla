@@ -29,25 +29,46 @@ N'ATTENDEZ PAS LE DERNIER JOUR POUR PRENDRE CONTACT AVEC MOI :(
 
 
 
-=======================================================
+======================================================================================================================
 
 ## création d'une image
 docker build -t debianjoomla:v1 .
+docker build -t nom_du_container .
 
 ## vérification création
 docker image ls
 
 ## lancer l'image
-docker run -d -p 80:80 debianjoomla:v1
+docker run -d -p 80:80 nom_du_container
 
 ## pour ouvrir dans le terminal dans le container
-docker run -it debianjoomla:v1
+docker run -it nom_du_container
 
 ## pour créer un container et ouvrir un bash dedans
-docker run -it debianjoomla:v1 bash
+docker run -it nom_du_container bash
 
 ## vérification de la présence de php
 php -v
 
 ## pour voir et faire des commande dans le container
 docker exec -it nom_du_container bash
+
+----------------------------------------------------------------------------------------------------------------------
+## créer un une fichier docker-compose.yml et créer la config
+
+## lancer docker compose
+docker-compose up 
+
+si c'est ok rend : Successfully built 4d21e952e97b4e45abe6f76b3661fa9195cfa2e6303ae1e02900576405ac5595
+et tout à la fin 
+```cmd
+Creating tp-joomla_joomla_1 ... done
+Attaching to tp-joomla_joomla_1
+tp-joomla_joomla_1 exited with code 0
+```
+
+## en tâche de fond 
+docker-compose up -d
+
+## arrêter docker compose
+docker-compose down 

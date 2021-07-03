@@ -1,0 +1,15 @@
+# configuration de docker-compose (exécuter une application multi-conteneur)
+
+version: "3.9"  # optional since v1.27.0
+services:
+  joomla:
+    build: .  # donne le contexte (le Dockerfile)
+    ports:
+      - "5000:80"
+    # volumes:
+    #   - .:/code
+    #   - logvolume01:/var/log
+    # links:
+    #   - joomladb:mysql
+# volumes:
+#   logvolume01: {}
