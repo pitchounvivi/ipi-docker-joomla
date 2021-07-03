@@ -26,3 +26,19 @@ Livrables attendus:
 en cas de besoin : rachid@sevenphere.io
 
 N'ATTENDEZ PAS LE DERNIER JOUR POUR PRENDRE CONTACT AVEC MOI :(
+
+
+
+=======================================================
+
+## création d'une image
+docker build -t debianjoomla:v1 .
+
+## vérification création
+docker image ls
+
+## lancer l'image
+docker run -d -p 80:80 debianjoomla:v1
+
+## pour ouvrir dans le terminal
+docker run -it debianjoomla:v1
