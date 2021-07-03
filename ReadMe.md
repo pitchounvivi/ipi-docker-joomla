@@ -31,9 +31,16 @@ N'ATTENDEZ PAS LE DERNIER JOUR POUR PRENDRE CONTACT AVEC MOI :(
 
 ======================================================================================================================
 
+https://www.hamrodev.com/en/app-development/joomla-docker-tutorial
+https://hub.docker.com/_/mysql
+
+======================================================================================================================
+
 ## création d'une image
 docker build -t debianjoomla:v1 .
 docker build -t nom_du_container .
+
+et tout à la fin : seulement du belu et terminal ok
 
 ## vérification création
 docker image ls
@@ -56,7 +63,7 @@ docker exec -it nom_du_container bash
 ----------------------------------------------------------------------------------------------------------------------
 ## créer un une fichier docker-compose.yml et créer la config
 
-## lancer docker compose
+## lancer docker compose (pour qu'il lie les images)
 docker-compose up 
 
 si c'est ok rend : Successfully built 4d21e952e97b4e45abe6f76b3661fa9195cfa2e6303ae1e02900576405ac5595
@@ -72,3 +79,12 @@ docker-compose up -d
 
 ## arrêter docker compose
 docker-compose down 
+
+
+----------------------------------------------------------------------------------------------------------------------
+## config Joomla
+
+
+
+
+
