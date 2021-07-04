@@ -34,11 +34,20 @@ https://hub.docker.com/_/mysql
     # Ajouter l'archive joomla et décompresse l'archive dans le dossier joomla
     ADD Joomla_3.9.27-Stable-Full_Package.tar.gz /var/www/html/joomla
 
-    # RUN chown -R www-data:www-data /var/www/html/joomla \
-    #     && chmod -R 755 /var/www/html/joomla
-
     # Le port
     EXPOSE 8080
+
+    # Nom de notre appli installée dans le RUN
+    # ENTRYPOINT ["service", "apache2", "start"] à la place mettre ça se qui lancera apache
+
+    # Commande pour avoir le serveur tourner en tâche de fond (avant d'utiliser docker-compose)
+    # CMD ["-D", "-f", "/etc/apache2/site-avaible/apache.conf"]
+
+    # pour ouvrir un bash
+    # ENTRYPOINT ["bin/bash"]
+
+    # tâche principale permet d'utiliser un bash pour executer le ficher initialisationApache.sh
+    ENTRYPOINT ["bash","initialisationApache.sh"]
 
 
 ---------------------------------------------------------------------------------------
@@ -108,15 +117,19 @@ docker exec -it nom_du_container bash
                 build: .  # donne le contexte (le Dockerfile)
                 ports:
                     - "8080:80"
+                # restart: always
                 links:
                     - joomladb:mysql  
-                volumes:
-                    - "../:/var/www/html"
-                    #   - .:/code
-                    #   - logvolume01:/var/log
+                volumes: # gauche dossier machine / droite dossier container
+                    # liaison des 2 conf
+                    - "./conf/joomla.conf:/etc/apache2/sites-available/joomla.conf" 
+
+                    # utilisation du fichiers avec les variables d'env
+                    - "./conf/initialisationApache.sh:/initialisationApache.sh" 
+
                 environment:
-                    JOOMLA_DB_HOST: joomladb
-                    JOOMLA_DB_PASSWORD: example
+                JOOMLA_DB_HOST: joomladb
+                JOOMLA_DB_PASSWORD: example 
 
 
 * Partie concernant la BDD : on ajoute une image mysql à joomla
@@ -136,25 +149,33 @@ docker exec -it nom_du_container bash
 
 * lancer docker compose (pour qu'il lie les images)
 
-
 ```cmd
 docker compose build
-```
-
-
-```cmd
-docker compose up 
 ```
 
 si c'est ok rend : 
 ```cmd
 Successfully built 4d21e952e97b4e45abe6f76b3661fa9195cfa2e6303ae1e02900576405ac5595
 ```
-et tout à la fin 
+j'obtient exited with code 0 signifie qu'il s'est arrêté (mais je n'ai pas d'erreur avant) 
 ```cmd
 Creating tp-joomla_joomla_1 ... done
 Attaching to tp-joomla_joomla_1
 tp-joomla_joomla_1 exited with code 0
+```
+
+quand joomla sera installé (et que j'ai la config joomla.conf à la place de celle par défaut), si tout est ok j'aurai :
+```cmd
+joomladb_1  | Version: '5.6.51'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+joomla_1    | Site 000-default already disabled
+joomla_1    | Site joomla already enabled
+joomla_1    | AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.3. Set the 'ServerName' directive globally to suppress this message    
+```
+
+* relancement/mise à jour
+
+```cmd
+docker compose up 
 ```
 
 * lancement en tâche de fond 
@@ -188,18 +209,30 @@ ou
 service apache2 reload
 ```
 
+( dans le cas où on souhaiterai utiliser directement une image existante 
 * Lancer une image ubuntu/apache en local
 ```cmd
 docker run -d --name apache2-container -e TZ=UTC -p 8080:80 ubuntu/apache2:2.4-21.04_beta
 ```
-
-docker run -d --name apache2-container -p 8080:80 apache2
+)
 
 ======================================================================================
 
 # JOOMLA 
 
+* le site se lance sur :
+http://localhost:8080/
 
-lancer une commande dans un container déjà lancer
+
+* lancer une commande dans un container déjà lancer
+```cmd
 docker exec -it tp-joomla_joomla_1 bash 
+```
+
+cette commande à permis d'ajouter le fichier :
+touch _JoomlajTlqywVqqPS2JLKPQH72G.txt
+
+dans le dossier : /var/www/html/joomla/installation#
+nécessaire pour finaliser l'installation de joomla
+
 

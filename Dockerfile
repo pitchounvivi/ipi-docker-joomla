@@ -19,11 +19,11 @@ ADD Joomla_3.9.27-Stable-Full_Package.tar.gz /var/www/html/joomla
 # Nom de notre appli installée dans le RUN
 # ENTRYPOINT ["service", "apache2", "start"] à la place mettre ça se qui lancera apache
 
-# Commande pour avoir le serveur tourner en tâche de fond
+# Commande pour avoir le serveur tourner en tâche de fond (avant d'utiliser docker-compose)
 # CMD ["-D", "-f", "/etc/apache2/site-avaible/apache.conf"]
 
-# pour ouvrir 
+# pour ouvrir un bash
 # ENTRYPOINT ["bin/bash"]
 
-# tâche principale (en linux ./ => signifie execute ce qui suit)
+# tâche principale permet d'utiliser un bash pour executer le ficher initialisationApache.sh
 ENTRYPOINT ["bash","initialisationApache.sh"]
