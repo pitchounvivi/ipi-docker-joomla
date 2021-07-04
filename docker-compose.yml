@@ -9,8 +9,11 @@ services:
     # restart: always
     links:
       - joomladb:mysql  
-    volumes:
-      - "../:/var/www/html/joomla"
+    volumes: # gauche dossier machine / droite dossier container
+    # liaison des 2 conf
+     - "./conf/joomla.conf:/etc/apache2/site-avaible/joomla.conf" 
+     
+    # - "../:/var/www/html/joomla"
     # - "./config/apache.conf:/etc/apache2/site-avaible/apache.conf"
     #   - .:/code
     #   - logvolume01:/var/log

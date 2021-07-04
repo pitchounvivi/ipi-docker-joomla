@@ -136,8 +136,14 @@ docker exec -it nom_du_container bash
 
 * lancer docker compose (pour qu'il lie les images)
 
+
 ```cmd
-docker-compose up 
+docker compose build
+```
+
+
+```cmd
+docker compose up 
 ```
 
 si c'est ok rend : 
