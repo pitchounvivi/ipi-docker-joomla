@@ -24,7 +24,8 @@ ADD Joomla_3.9.27-Stable-Full_Package.tar.gz /var/www/html/joomla
 # Commande pour avoir le serveur tourner en tâche de fond
 # CMD ["-D", "-f", "/etc/apache2/site-avaible/apache.conf"]
 
+# pour ouvrir 
 # ENTRYPOINT ["bin/bash"]
 
-# tâche principale
-ENTRYPOINT ["apache2", "-DFOREGROUND"]
+# tâche principale (en linux ./ => signifie execute ce qui suit)
+ENTRYPOINT ["bash","initialisationApache.sh"]
