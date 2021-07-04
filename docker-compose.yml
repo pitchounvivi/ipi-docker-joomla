@@ -5,14 +5,19 @@ services:
   joomla: 
     build: .  # donne le contexte (le Dockerfile)
     ports:
-      - "5000:80"
-    # volumes:
+      - "8080:80"
+    # restart: always
+    links:
+      - joomladb:mysql  
+    volumes:
+      - "../:/var/www/html/joomla"
+    # - "./config/apache.conf:/etc/apache2/site-avaible/apache.conf"
     #   - .:/code
     #   - logvolume01:/var/log
-    # links:
-    #   - joomladb:mysql
-# volumes:
-#   logvolume01: {}
+    environment:
+      JOOMLA_DB_HOST: joomladb
+      JOOMLA_DB_PASSWORD: example  
+
 
   joomladb: # ajout d'une image de BDD mysql à joomla
     image: mysql:5.6
@@ -23,3 +28,7 @@ services:
       - "./data:/var/lib/mysql"
     environment:
       MYSQL_ROOT_PASSWORD: example
+
+
+# volumes:
+#   logvolume01: {}
