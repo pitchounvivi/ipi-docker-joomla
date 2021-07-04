@@ -12,8 +12,6 @@ RUN apt-get update -y \
 # Ajouter l'archive joomla et décompresse l'archive dans le dossier joomla
 ADD Joomla_3.9.27-Stable-Full_Package.tar.gz /var/www/html/joomla
 
-# RUN chown -R www-data:www-data /var/www/html/joomla \
-#     && chmod -R 755 /var/www/html/joomla
 
 # Le port
 # EXPOSE 8080

@@ -11,5 +11,11 @@ sleep 5
 a2dissite 000-default.conf
 a2ensite joomla.conf
 
+
+chown -R www-data:www-data /var/www/html/joomla 
+chmod -R 777 /var/www/html/joomla
+
+
 # commande qui lance Apache en tâche principale
 apache2 -DFOREGROUND
+
