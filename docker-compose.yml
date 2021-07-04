@@ -11,7 +11,7 @@ services:
       - joomladb:mysql  
     volumes: # gauche dossier machine / droite dossier container
     # liaison des 2 conf
-     - "./conf/joomla.conf:/etc/apache2/site-avaible/joomla.conf" 
+     - "./conf/joomla.conf:/etc/apache2/sites-available/joomla.conf" 
 
     # utilisation du fichiers avec les variables d'env
      - "./conf/initialisationApache.sh:/initialisationApache.sh" 

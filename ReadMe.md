@@ -200,6 +200,6 @@ docker run -d --name apache2-container -p 8080:80 apache2
 # JOOMLA 
 
 
-
-
+lancer une commande dans un container déjà lancer
+docker exec -it tp-joomla_joomla_1 bash 
 
