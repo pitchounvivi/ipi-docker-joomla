@@ -11,7 +11,7 @@ sleep 5
 a2dissite 000-default.conf
 a2ensite joomla.conf
 
-
+# autorisation d'écriture et droit
 chown -R www-data:www-data /var/www/html/joomla 
 chmod -R 777 /var/www/html/joomla
 
