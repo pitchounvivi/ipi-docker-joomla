@@ -1,3 +1,8 @@
+# Aides commandes
+
+Il s'agit simplement d'un fichier pense-bête pour récapituler toutes les commandes que j'ai utilisé pour effectuer le TP.
+Il y a également des explications, pour le cas où je reviendrais dans plusieurs mois ...
+
 ======================================================================================
 
 Aide sur :
@@ -17,6 +22,10 @@ https://hub.docker.com/_/mysql
 # DOCKER
 
 * créer un fichier Dockerfile
+
+```bash
+touch Dockerfile
+```
 
 ## La config Dockerfile
 
@@ -94,7 +103,7 @@ docker run -it nom_du_container bash
 php -v
 ```
 
-* pour voir et faire des commande dans le container
+* pour voir et faire des commandes dans le container
 
 ```cmd
 docker exec -it nom_du_container bash
@@ -106,6 +115,10 @@ docker exec -it nom_du_container bash
 # DOCKER-COMPOSE
 
 * créer un une fichier docker-compose.yml
+
+```bash
+touch docker-compose.yml
+```
 
 ## la config docker-composer.yml
 
@@ -120,7 +133,7 @@ docker exec -it nom_du_container bash
                 # restart: always
                 links:
                     - joomladb:mysql  
-                volumes: # gauche dossier machine / droite dossier container
+                volumes: # /gauche dossier_machine : /droite dossier_container
                     # liaison des 2 conf
                     - "./conf/joomla.conf:/etc/apache2/sites-available/joomla.conf" 
 
@@ -150,7 +163,7 @@ docker exec -it nom_du_container bash
 * lancer docker compose (pour qu'il lie les images)
 
 ```cmd
-docker compose build
+docker-compose build
 ```
 
 si c'est ok rend : 
@@ -175,7 +188,7 @@ joomla_1    | AH00558: apache2: Could not reliably determine the server's fully 
 * relancement/mise à jour
 
 ```cmd
-docker compose up 
+docker-compose up 
 ```
 
 * lancement en tâche de fond 
@@ -224,15 +237,33 @@ docker run -d --name apache2-container -e TZ=UTC -p 8080:80 ubuntu/apache2:2.4-2
 http://localhost:8080/
 
 
+## Installation JOOMLA 
+
 * lancer une commande dans un container déjà lancer
 ```cmd
 docker exec -it tp-joomla_joomla_1 bash 
 ```
 
-cette commande à permis d'ajouter le fichier :
+cette commande à permis d'ajouter le fichier : _JoomlajTlqywVqqPS2JLKPQH72G.txt
+```bash
 touch _JoomlajTlqywVqqPS2JLKPQH72G.txt
+```
 
 dans le dossier : /var/www/html/joomla/installation#
-nécessaire pour finaliser l'installation de joomla
+nécessaire pour finaliser l'installation de joomla et demandé par Joomla
 
+
+## Lancement de Joomla
+
+* dans un terminal : lancer docker-compose
+
+```cmd
+docker-compose up
+```
+
+* dans un terminal faire : lancer apache
+
+```cmd
+docker exec -it tp-joomla_joomla_1 bash
+```
 
